@@ -1,7 +1,7 @@
 package com.codingwithmitch.mviexample.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.codingwithmitch.mviexample.R
 
