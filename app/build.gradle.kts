@@ -36,7 +36,7 @@ dependencies {
     // AndroidX Core
     implementation("androidx.core:core-ktx:1.3.0")
     implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation ("androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
 
     // Retrofit2
     val retrofit2Version = "2.6.0"
