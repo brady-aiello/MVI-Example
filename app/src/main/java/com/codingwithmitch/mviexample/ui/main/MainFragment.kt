@@ -2,7 +2,12 @@ package com.codingwithmitch.mviexample.ui.main
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +15,6 @@ import com.codingwithmitch.mviexample.R
 import com.codingwithmitch.mviexample.ui.DataStateListener
 import com.codingwithmitch.mviexample.ui.main.state.MainStateEvent.GetBlogPostsEvent
 import com.codingwithmitch.mviexample.ui.main.state.MainStateEvent.GetUserEvent
-import java.lang.ClassCastException
 
 class MainFragment : Fragment() {
 
@@ -40,13 +44,16 @@ class MainFragment : Fragment() {
 
             dataStateHandler.onDataStateChange(dataState)
 
-            dataState.data?.let { mainViewState ->
-                mainViewState.blogPosts?.let {
-                    viewModel.setBlogListData(it)
+            dataState.data?.let { event ->
+                event.getContentIfNotHandled()?.let { mainViewState ->
+                    mainViewState.blogPosts?.let {
+                        viewModel.setBlogListData(it)
+                    }
+                    mainViewState.user?.let {
+                        viewModel.setUser(it)
+                    }
                 }
-                mainViewState.user?.let {
-                    viewModel.setUser(it)
-                }
+
             }
         })
 
