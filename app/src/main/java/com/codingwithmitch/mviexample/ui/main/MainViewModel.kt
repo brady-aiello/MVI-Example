@@ -8,7 +8,9 @@ import com.codingwithmitch.mviexample.model.BlogPost
 import com.codingwithmitch.mviexample.model.User
 import com.codingwithmitch.mviexample.repository.Repository
 import com.codingwithmitch.mviexample.ui.main.state.MainStateEvent
-import com.codingwithmitch.mviexample.ui.main.state.MainStateEvent.*
+import com.codingwithmitch.mviexample.ui.main.state.MainStateEvent.GetBlogPostsEvent
+import com.codingwithmitch.mviexample.ui.main.state.MainStateEvent.GetUserEvent
+import com.codingwithmitch.mviexample.ui.main.state.MainStateEvent.None
 import com.codingwithmitch.mviexample.ui.main.state.MainViewState
 import com.codingwithmitch.mviexample.util.AbsentLiveData
 import com.codingwithmitch.mviexample.util.DataState
@@ -26,15 +28,15 @@ class MainViewModel: ViewModel() {
     }
 
     private fun handleStateEvent(stateEvent: MainStateEvent): LiveData<DataState<MainViewState>> {
-        when (stateEvent) {
+        return when (stateEvent) {
             is GetBlogPostsEvent -> {
-                return Repository.getBlogPosts()
+                Repository.getBlogPosts()
             }
             is GetUserEvent -> {
-                return Repository.getUser(stateEvent.userId)
+                Repository.getUser(stateEvent.userId)
             }
             is None -> {
-                return AbsentLiveData.create()
+                AbsentLiveData.create()
             }
         }
     }
@@ -52,9 +54,7 @@ class MainViewModel: ViewModel() {
     }
 
     private fun getCurrentViewStateOrNew(): MainViewState {
-        return viewState.value?.let {
-            it
-        }?: MainViewState()
+        return viewState.value ?: MainViewState()
     }
 
     fun setStateEvent(event: MainStateEvent) {

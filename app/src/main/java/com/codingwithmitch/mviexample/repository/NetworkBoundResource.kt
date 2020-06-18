@@ -5,7 +5,9 @@ import androidx.lifecycle.MediatorLiveData
 import com.codingwithmitch.mviexample.util.Constants
 import com.codingwithmitch.mviexample.util.DataState
 import com.codingwithmitch.mviexample.util.GenericApiResponse
-import com.codingwithmitch.mviexample.util.GenericApiResponse.*
+import com.codingwithmitch.mviexample.util.GenericApiResponse.ApiEmptyResponse
+import com.codingwithmitch.mviexample.util.GenericApiResponse.ApiErrorResponse
+import com.codingwithmitch.mviexample.util.GenericApiResponse.ApiSuccessResponse
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
@@ -30,7 +32,7 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
         }
     }
 
-    fun handleNetworkCall(response: GenericApiResponse<ResponseObject>) {
+    private fun handleNetworkCall(response: GenericApiResponse<ResponseObject>) {
         when (response) {
             is ApiSuccessResponse -> {
                 handleApiSuccessResponse(response)
@@ -46,7 +48,7 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
         }
     }
 
-    fun onReturnError(message: String) {
+    private fun onReturnError(message: String) {
         result.value = DataState.error(message)
     }
 

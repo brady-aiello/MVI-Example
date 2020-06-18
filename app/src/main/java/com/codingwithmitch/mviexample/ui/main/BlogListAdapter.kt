@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.layout_blog_list_item.view.*
 class BlogListAdapter(private val interaction: Interaction? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BlogPost>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<BlogPost>() {
 
         override fun areItemsTheSame(oldItem: BlogPost, newItem: BlogPost): Boolean {
             return oldItem.primaryKey == newItem.primaryKey
@@ -25,7 +25,7 @@ class BlogListAdapter(private val interaction: Interaction? = null) :
         }
 
     }
-    private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
+    private val differ = AsyncListDiffer(this, diffCallback)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

@@ -25,9 +25,9 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(), Interaction {
 
-    lateinit var viewModel: MainViewModel
-    lateinit var dataStateHandler: DataStateListener
-    lateinit var blogListAdapter: BlogListAdapter
+    private lateinit var viewModel: MainViewModel
+    private lateinit var dataStateHandler: DataStateListener
+    private lateinit var blogListAdapter: BlogListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +57,7 @@ class MainFragment : Fragment(), Interaction {
         }
     }
 
-    fun subscribeObservers() {
+    private fun subscribeObservers() {
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
             println("DEBUG: DataState: $dataState")
 

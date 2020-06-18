@@ -11,7 +11,7 @@ import com.codingwithmitch.mviexample.util.DataState
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), DataStateListener {
-    lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onDataStateChange(dataState: DataState<*>?) {
         handleDataStateChange(dataState)
@@ -35,17 +35,17 @@ class MainActivity : AppCompatActivity(), DataStateListener {
         showMainFragment()
     }
 
-    fun showMainFragment() {
+    private fun showMainFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, MainFragment(), "MainFragment")
             .commit()
     }
 
-    fun showToast(message: String) {
+    private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun showProgressBar(isVisible: Boolean) {
+    private fun showProgressBar(isVisible: Boolean) {
         if (isVisible) {
             progress_bar.visibility = View.VISIBLE
         } else {
